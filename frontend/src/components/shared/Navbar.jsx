@@ -1,14 +1,13 @@
-import React from 'react'
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
-import { Button } from '../ui/button'
-import { Avatar, AvatarImage } from '../ui/avatar'
-import { LogOut, User2 } from 'lucide-react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import axios from 'axios'
-import { USER_API_END_POINT } from '@/utils/constant'
-import { setUser } from '@/redux/authSlice'
-import { toast } from 'sonner'
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { Button } from '../ui/button';
+import { Avatar, AvatarImage } from '../ui/avatar';
+import { LogOut, User2 } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { USER_API_END_POINT } from '@/utils/constant';
+import { setUser } from '@/redux/authSlice';
+import { toast } from 'sonner';
 import logo from '../../assets/SNKPK.png';
 
 const Navbar = () => {
@@ -29,12 +28,14 @@ const Navbar = () => {
             toast.error(error.response.data.message);
         }
     }
+
     return (
         <div className='bg-white'>
             <div className='flex items-center justify-between mx-auto max-w-7xl h-16'>
                 <div>
                     <Link to={"/"}>
-                        <img style={{ maxWidth: "300px", marginTop: '30px' }} src={logo} alt="logo" /></Link >
+                        <img style={{ maxWidth: "300px", marginTop: '30px' }} src={logo} alt="logo" />
+                    </Link>
                 </div>
                 <div className='flex items-center gap-12'>
                     <ul className='flex font-medium items-center gap-5'>
@@ -52,8 +53,6 @@ const Navbar = () => {
                                 </>
                             )
                         }
-
-
                     </ul>
                     {
                         !user ? (
@@ -81,7 +80,7 @@ const Navbar = () => {
                                         </div>
                                         <div className='flex flex-col my-2 text-gray-600'>
                                             {
-                                                user && user.role === 'student' && (
+                                                    user && user.role === 'employee' && (
                                                     <div className='flex w-fit items-center gap-2 cursor-pointer'>
                                                         <User2 />
                                                         <Button variant="link"> <Link to="/profile">View Profile</Link></Button>
@@ -99,12 +98,16 @@ const Navbar = () => {
                             </Popover>
                         )
                     }
-
                 </div>
             </div>
 
+            {user?.role === 'employee' && !user?.profile?.resume && (
+                <div className='bg-yellow-400 p-2 text-center mt-8'>
+                    <p className='text-red-500'>Please upload your resume to apply for jobs.</p>
+                </div>
+            )}
         </div>
     )
 }
 
-export default Navbar
+export default Navbar;

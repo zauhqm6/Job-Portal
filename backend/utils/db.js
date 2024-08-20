@@ -5,10 +5,17 @@ const connectDB = async () => {
 
 
     try {
-        await mongoose.connect(URI);
-        console.log('mongodb connected successfully');
-    } catch (error) {
-        console.log(error);
+        await mongoose.connect(URI), {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            serverSelectionTimeoutMS: 20000,
+        }.then(() => {
+            console.log('Connected to MongoDB');
+        })
     }
+
+    catch (err) {
+        console.error('Error connecting to MongoDB', err);
+    };
 }
 export default connectDB;

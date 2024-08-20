@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from './ui/dialog'
 import { Label } from './ui/label'
 import { Input } from './ui/input'
@@ -126,7 +126,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                                     name="skills"
                                     value={input.skills}
                                     onChange={changeEventHandler}
-                                    className="col-span-3"
+                                    className="col-span-3" placeholder="Enter Skill separated by comma"
                                 />
                             </div>
                             <div className='grid grid-cols-4 items-center gap-4'>
